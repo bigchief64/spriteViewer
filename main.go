@@ -39,7 +39,7 @@ func (g game) Draw(screen *ebiten.Image) {
 
 	if baseImage != nil {
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(20, 30)
+		op.GeoM.Translate(float64(screenWidth -300), 170)
 		screen.DrawImage(baseImage, op)
 	}
 }

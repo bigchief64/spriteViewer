@@ -40,7 +40,7 @@ func NewLabel(x, y, w, h int, text string) Label{
 	if err := im.LoadFontFace("c:/Windows/Fonts/Arial.TTF", 18); err != nil {
 		log.Fatal(err)
 	}
-	im.DrawString(text, 10, 15)
+	im.DrawStringAnchored(text, float64(l.W/2), float64(l.H/2), 0.5, 0.5)
 
 	l.image = ebiten.NewImageFromImage(im.Image())
 

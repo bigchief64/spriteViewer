@@ -34,7 +34,7 @@ func (t *TextBox)drawImage(text string) *ebiten.Image{
 	if err := im.LoadFontFace("c:/Windows/Fonts/Arial.TTF", 18); err != nil {
 		log.Fatal(err)
 	}
-	im.DrawString(text, 10, 15)
+	im.DrawStringAnchored(text, float64(t.W/2), float64(t.H/2), 0.5, 0.5)
 
 	img := ebiten.NewImageFromImage(im.Image())
 	return img
