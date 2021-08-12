@@ -13,6 +13,33 @@ type TextBox struct {
 	receiveText bool
 }
 
+func (t *TextBox) Update() {
+	if !t.receiveText {
+		t.Button.Update()
+		return
+	}
+
+	t.drawImage(t.text)
+}
+
+func (t *TextBox)drawImage(text string) *ebiten.Image{
+	im := gg.NewContext(t.W, t.H)
+	t.text = text
+
+	im.SetRGB(0, 1, 0)
+	im.DrawRectangle(0, 0, float64(t.W), float64(t.H))
+	im.Fill()
+
+	im.SetRGB(0, 0, 0)
+	if err := im.LoadFontFace("c:/Windows/Fonts/Arial.TTF", 18); err != nil {
+		log.Fatal(err)
+	}
+	im.DrawString(text, 10, 15)
+
+	img := ebiten.NewImageFromImage(im.Image())
+	return img
+}
+
 
 func NewTextBox(x, y, w, h int, text string) TextBox{
 	u := TextBox{}
@@ -22,24 +49,16 @@ func NewTextBox(x, y, w, h int, text string) TextBox{
 	u.H = h
 	u.text = text
 
-	im := gg.NewContext(w, h)
-
-	im.SetRGB(0, 1, 0)
-	im.DrawRectangle(0, 0, float64(w), float64(h))
-	im.Fill()
-
-	im.SetRGB(0, 0, 0)
-	if err := im.LoadFontFace("c:/Windows/Fonts/Arial.TTF", 18); err != nil {
-		log.Fatal(err)
-	}
-	im.DrawString(text, 10, 15)
-
-	u.image = ebiten.NewImageFromImage(im.Image())
+	u.image = u.drawImage(text)
 
 	u.highlightedImage = ebiten.NewImage(u.W, u.H)
 	op := &ebiten.DrawImageOptions{}
 	op.ColorM.ChangeHSV(0, 0, 1.5)
 	u.highlightedImage.DrawImage(u.image, op)
+
+	u.a = func (){
+		u.receiveText = true
+	}
 
 	return u
 }
