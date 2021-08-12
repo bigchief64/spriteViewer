@@ -81,27 +81,27 @@ func createDrawers() *[]drawer {
 	var d []drawer
 
 	button := ui.NewButton(10, 10, 120, 20, "Load Image", OpenDialog)
-	d = append(d, &button)
+	d = append(d, button)
 
 	labelColumn := screenWidth - 300
 	label := ui.NewLabel(labelColumn, 10, 120, 20, "Frame Width")
-	d = append(d, &label)
+	d = append(d, label)
 	label1 := ui.NewLabel(labelColumn, 40, 120, 20, "Frame Height")
-	d = append(d, &label1)
+	d = append(d, label1)
 	label2 := ui.NewLabel(labelColumn, 70, 120, 20, "Frame Speed")
-	d = append(d, &label2)
+	d = append(d, label2)
 	label3 := ui.NewLabel(labelColumn, 110, 120, 20, "Row")
-	d = append(d, &label3)
+	d = append(d, label3)
 
 	tBoxColumn := labelColumn + 150
 	tBox := ui.NewTextBox(tBoxColumn, 10, 120, 20, "32")
-	d = append(d, &tBox)
+	d = append(d, tBox)
 	tBox1 := ui.NewTextBox(tBoxColumn, 40, 120, 20, "32")
-	d = append(d, &tBox1)
+	d = append(d, tBox1)
 	tBox2 := ui.NewTextBox(tBoxColumn, 70, 120, 20, "20")
-	d = append(d, &tBox2)
+	d = append(d, tBox2)
 	tBox3 := ui.NewTextBox(tBoxColumn, 110, 120, 20, "0")
-	d = append(d, &tBox3)
+	d = append(d, tBox3)
 
 	return &d
 }

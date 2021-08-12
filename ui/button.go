@@ -38,7 +38,7 @@ func (u *Button) Update() {
 	}
 }
 
-func NewButton(x, y, w, h int, text string, f clickAction) Button {
+func NewButton(x, y, w, h int, text string, f clickAction) *Button {
 	u := Button{}
 	u.a = f
 	u.X = x
@@ -66,5 +66,5 @@ func NewButton(x, y, w, h int, text string, f clickAction) Button {
 	op.ColorM.ChangeHSV(0, 0, 1.5)
 	u.highlightedImage.DrawImage(u.image, op)
 
-	return u
+	return &u
 }

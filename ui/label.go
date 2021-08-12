@@ -22,7 +22,7 @@ func (l *Label) Draw() (*ebiten.Image, int, int) {
 	return l.image, l.X, l.Y
 }
 
-func NewLabel(x, y, w, h int, text string) Label {
+func NewLabel(x, y, w, h int, text string) *Label {
 	l := Label{}
 	l.X = x
 	l.Y = y
@@ -44,5 +44,5 @@ func NewLabel(x, y, w, h int, text string) Label {
 
 	l.image = ebiten.NewImageFromImage(im.Image())
 
-	return l
+	return &l
 }

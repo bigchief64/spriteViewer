@@ -40,7 +40,7 @@ func (t *TextBox) drawImage(text string) *ebiten.Image {
 	return img
 }
 
-func NewTextBox(x, y, w, h int, text string) TextBox {
+func NewTextBox(x, y, w, h int, text string) *TextBox {
 	u := TextBox{}
 	u.X = x
 	u.Y = y
@@ -59,5 +59,5 @@ func NewTextBox(x, y, w, h int, text string) TextBox {
 		u.receiveText = true
 	}
 
-	return u
+	return &u
 }
