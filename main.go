@@ -17,6 +17,7 @@ var (
 	screenHeight = 400
 	baseImage    *ebiten.Image
 	background   *ebiten.Image
+	anim         Anim
 
 	widthBox, heightBox, speedBox, rowBox *ui.TextBox
 )
@@ -49,7 +50,7 @@ func (g game) Draw(screen *ebiten.Image) {
 
 	if baseImage != nil {
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(float64(screenWidth-300), 170)
+		op.GeoM.Translate(float64(screenWidth-300), 130)
 		screen.DrawImage(baseImage, op)
 	}
 }
@@ -102,7 +103,7 @@ func createDrawers() *[]drawer {
 	d = append(d, label1)
 	label2 := ui.NewLabel(labelColumn, 70, 120, 20, "Frame Speed")
 	d = append(d, label2)
-	label3 := ui.NewLabel(labelColumn, 110, 120, 20, "Row")
+	label3 := ui.NewLabel(labelColumn, 100, 120, 20, "Row")
 	d = append(d, label3)
 
 	tBoxColumn := labelColumn + 150
@@ -112,7 +113,7 @@ func createDrawers() *[]drawer {
 	d = append(d, heightBox)
 	speedBox = ui.NewTextBox(tBoxColumn, 70, 120, 20, "5")
 	d = append(d, speedBox)
-	rowBox = ui.NewTextBox(tBoxColumn, 110, 120, 20, "0")
+	rowBox = ui.NewTextBox(tBoxColumn, 100, 120, 20, "0")
 	d = append(d, rowBox)
 
 	return &d
@@ -162,6 +163,9 @@ func OpenDialog() {
 
 	baseImage = ebiten.NewImageFromImage(image)
 
-	anim := NewAnim(10, 50, baseImage)
-	drawers = append(drawers, anim)
+	a := NewAnim(10, 50, baseImage)
+	if anim.speed == 0 {
+		drawers = append(drawers, &anim)
+	}
+	anim = *a
 }
