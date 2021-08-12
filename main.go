@@ -1,11 +1,13 @@
 package main
 
 import (
-	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/harry1453/go-common-file-dialog/cfd"
+	"fmt"
 	"image"
 	"log"
 	"os"
+
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/harry1453/go-common-file-dialog/cfd"
 )
 
 var (
@@ -133,7 +135,8 @@ func OpenDialog() {
 	//	log.Fatal("Dialog was cancelled by the user.")
 	//}
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
+		return
 	}
 	log.Printf("Chosen file: %s\n", result)
 
