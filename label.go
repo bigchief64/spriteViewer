@@ -8,28 +8,28 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-type Label struct{
+type Label struct {
 	image *ebiten.Image
 	tools.Box
 	text string
 }
 
-func (l *Label)Text() string{
+func (l *Label) Text() string {
 	return l.text
 }
 
-func (l *Label) Draw()(*ebiten.Image, int, int) {
+func (l *Label) Draw() (*ebiten.Image, int, int) {
 	return l.image, l.X, l.Y
 }
 
-func NewLabel(x, y, w, h int, text string) Label{
+func NewLabel(x, y, w, h int, text string) Label {
 	l := Label{}
-	l.X = x 
-	l.Y = y 
-	l.H = h 
-	l.W = w 
+	l.X = x
+	l.Y = y
+	l.H = h
+	l.W = w
 	l.text = text
-	
+
 	im := gg.NewContext(w, h)
 
 	im.SetRGB(0, 0, 1)

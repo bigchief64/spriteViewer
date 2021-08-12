@@ -41,7 +41,7 @@ func (g game) Draw(screen *ebiten.Image) {
 
 	if baseImage != nil {
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(float64(screenWidth -300), 170)
+		op.GeoM.Translate(float64(screenWidth-300), 170)
 		screen.DrawImage(baseImage, op)
 	}
 }
@@ -76,7 +76,7 @@ func main() {
 	}
 }
 
-func createDrawers() *[]drawer{
+func createDrawers() *[]drawer {
 	var d []drawer
 
 	button := NewButton(10, 10, 120, 20, "Load Image", OpenDialog)
