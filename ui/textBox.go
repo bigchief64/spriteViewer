@@ -36,9 +36,10 @@ func (t *TextBox) drawImage(text string) *ebiten.Image {
 	im := gg.NewContext(t.W, t.H)
 	t.text = text
 
-	im.SetRGB(0, 1, 0)
+	im.SetRGB(0, 0, 0)
+	im.SetLineWidth(3)
 	im.DrawRectangle(0, 0, float64(t.W), float64(t.H))
-	im.Fill()
+	im.Stroke()
 
 	im.SetRGB(0, 0, 0)
 	if err := im.LoadFontFace("c:/Windows/Fonts/Arial.TTF", 18); err != nil {

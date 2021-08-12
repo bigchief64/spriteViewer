@@ -106,7 +106,7 @@ func createDrawers() *[]drawer {
 	d = append(d, label3)
 
 	tBoxColumn := labelColumn + 150
-	widthBox = ui.NewTextBox(tBoxColumn, 10, 120, 20, "32")
+	widthBox = ui.NewTextBox(tBoxColumn, 10, 120, 20, "16")
 	d = append(d, widthBox)
 	heightBox = ui.NewTextBox(tBoxColumn, 40, 120, 20, "32")
 	d = append(d, heightBox)

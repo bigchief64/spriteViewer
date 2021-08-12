@@ -20,6 +20,11 @@ func (a *Anim) Draw() (*ebiten.Image, int, int) {
 
 func (a *Anim) Update() {
 	a.frameCount++
+	
+	a.row = rowBox.Value()
+	a.W = widthBox.Value()
+	a.H = heightBox.Value()
+	a.speed = speedBox.Value()
 
 	if a.frameCount >= a.speed {
 		a.frameCount = 0
