@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/fogleman/gg"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/harry1453/go-common-file-dialog/cfd"
 )
@@ -15,6 +16,9 @@ var (
 	screenWidth  = 800
 	screenHeight = 600
 	baseImage    *ebiten.Image
+	background *ebiten.Image
+
+	widthBox, heightBox, speedBox, rowBox *ui.TextBox
 )
 
 type game struct {
@@ -33,6 +37,9 @@ type updater interface {
 }
 
 func (g game) Draw(screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+	screen.DrawImage(background, op)
+
 	for _, v := range drawers {
 		img, x, y := v.Draw()
 		op := &ebiten.DrawImageOptions{}
@@ -69,6 +76,11 @@ func main() {
 	g.height = screenHeight
 
 	drawers = *createDrawers()
+	bg := gg.NewContext(g.width, g.height)
+	bg.SetRGB(1, 1, 1)
+	bg.DrawRectangle(0, 0, float64(g.width), float64(g.height))
+	bg.Fill()
+	background = ebiten.NewImageFromImage(bg.Image())
 
 	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
 	ebiten.SetWindowTitle("Sprites (Ebiten Demo)")
@@ -94,14 +106,14 @@ func createDrawers() *[]drawer {
 	d = append(d, label3)
 
 	tBoxColumn := labelColumn + 150
-	tBox := ui.NewTextBox(tBoxColumn, 10, 120, 20, "32")
-	d = append(d, tBox)
-	tBox1 := ui.NewTextBox(tBoxColumn, 40, 120, 20, "32")
-	d = append(d, tBox1)
-	tBox2 := ui.NewTextBox(tBoxColumn, 70, 120, 20, "20")
-	d = append(d, tBox2)
-	tBox3 := ui.NewTextBox(tBoxColumn, 110, 120, 20, "0")
-	d = append(d, tBox3)
+	widthBox = ui.NewTextBox(tBoxColumn, 10, 120, 20, "32")
+	d = append(d, widthBox)
+	heightBox = ui.NewTextBox(tBoxColumn, 40, 120, 20, "32")
+	d = append(d, heightBox)
+	speedBox = ui.NewTextBox(tBoxColumn, 70, 120, 20, "5")
+	d = append(d, speedBox)
+	rowBox = ui.NewTextBox(tBoxColumn, 110, 120, 20, "0")
+	d = append(d, rowBox)
 
 	return &d
 }

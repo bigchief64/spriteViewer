@@ -1,7 +1,9 @@
 package ui
 
 import (
+	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/fogleman/gg"
 	"github.com/hajimehoshi/ebiten/v2"
@@ -20,6 +22,14 @@ func (t *TextBox) Update() {
 	}
 
 	t.drawImage(t.text)
+}
+
+func (t *TextBox) Value() int {
+	i, err := strconv.Atoi(t.text)
+	if err != nil{
+		fmt.Println("Entered Value is not an integer")
+	}
+	return i
 }
 
 func (t *TextBox) drawImage(text string) *ebiten.Image {
