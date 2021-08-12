@@ -1,11 +1,11 @@
 package main
 
 import (
+	"bigchief64/spriteViewer/ui"
 	"fmt"
 	"image"
 	"log"
 	"os"
-	"bigchief64/spriteViewer/ui"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/harry1453/go-common-file-dialog/cfd"
@@ -149,4 +149,7 @@ func OpenDialog() {
 	image, _, _ := image.Decode(f)
 
 	baseImage = ebiten.NewImageFromImage(image)
+
+	anim := NewAnim(10, 50, baseImage)
+	drawers = append(drawers, anim)
 }
