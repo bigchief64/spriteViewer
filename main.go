@@ -13,10 +13,10 @@ import (
 )
 
 var (
-	screenWidth  = 800
-	screenHeight = 600
+	screenWidth  = 600
+	screenHeight = 400
 	baseImage    *ebiten.Image
-	background *ebiten.Image
+	background   *ebiten.Image
 
 	widthBox, heightBox, speedBox, rowBox *ui.TextBox
 )
@@ -83,7 +83,7 @@ func main() {
 	background = ebiten.NewImageFromImage(bg.Image())
 
 	ebiten.SetWindowSize(screenWidth*2, screenHeight*2)
-	ebiten.SetWindowTitle("Sprites (Ebiten Demo)")
+	ebiten.SetWindowTitle("Sprite Viewer")
 	if err := ebiten.RunGame(&g); err != nil {
 		log.Fatal(err)
 	}

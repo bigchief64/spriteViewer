@@ -26,7 +26,7 @@ func (t *TextBox) Update() {
 
 func (t *TextBox) Value() int {
 	i, err := strconv.Atoi(t.text)
-	if err != nil{
+	if err != nil {
 		fmt.Println("Entered Value is not an integer")
 	}
 	return i
