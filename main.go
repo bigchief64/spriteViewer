@@ -18,7 +18,7 @@ var (
 	baseImage    *ebiten.Image
 	background   *ebiten.Image
 	anim         Anim
-	filePath string
+	filePath     string
 
 	widthBox, heightBox, speedBox, rowBox *ui.TextBox
 )
@@ -51,6 +51,15 @@ func (g game) Draw(screen *ebiten.Image) {
 
 	if baseImage != nil {
 		op := &ebiten.DrawImageOptions{}
+		ix, iy := baseImage.Size()
+		goalSize := 320
+		if iy > goalSize {
+			newScale := float64(goalSize)/float64(iy)
+			op.GeoM.Scale(newScale, newScale)
+		} else if ix > goalSize{
+			newScale := float64(goalSize)/float64(ix)
+			op.GeoM.Scale(newScale, newScale)
+		}
 		op.GeoM.Translate(float64(screenWidth-300), 130)
 		screen.DrawImage(baseImage, op)
 	}
@@ -122,8 +131,8 @@ func createDrawers() *[]drawer {
 	return &d
 }
 
-func LoadImage(){
-	if filePath == ""{
+func LoadImage() {
+	if filePath == "" {
 		return
 	}
 	fmt.Printf("Loading image %v now", filePath)
@@ -143,7 +152,7 @@ func LoadImage(){
 	anim = *a
 }
 
-func OpenDialog(){
+func OpenDialog() {
 	openDialog, err := cfd.NewOpenFileDialog(cfd.DialogConfig{
 		Title: "Open A File",
 		Role:  "OpenFileExample",
