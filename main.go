@@ -123,6 +123,9 @@ func createDrawers() *[]drawer {
 }
 
 func LoadImage(){
+	if filePath == ""{
+		return
+	}
 	fmt.Printf("Loading image %v now", filePath)
 	f, err := os.Open(filePath)
 	if err != nil {
