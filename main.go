@@ -18,6 +18,7 @@ var (
 	baseImage    *ebiten.Image
 	background   *ebiten.Image
 	anim         Anim
+	filePath string
 
 	widthBox, heightBox, speedBox, rowBox *ui.TextBox
 )
@@ -95,6 +96,8 @@ func createDrawers() *[]drawer {
 
 	button := ui.NewButton(10, 10, 120, 20, "Load Image", OpenDialog)
 	d = append(d, button)
+	button1 := ui.NewButton(150, 10, 120, 20, "Reload", LoadImage)
+	d = append(d, button1)
 
 	labelColumn := screenWidth - 300
 	label := ui.NewLabel(labelColumn, 10, 120, 20, "Frame Width")
@@ -119,7 +122,25 @@ func createDrawers() *[]drawer {
 	return &d
 }
 
-func OpenDialog() {
+func LoadImage(){
+	fmt.Printf("Loading image %v now", filePath)
+	f, err := os.Open(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	image, _, _ := image.Decode(f)
+
+	baseImage = ebiten.NewImageFromImage(image)
+
+	a := NewAnim(10, 50, baseImage)
+	if anim.speed == 0 {
+		drawers = append(drawers, &anim)
+	}
+	anim = *a
+}
+
+func OpenDialog(){
 	openDialog, err := cfd.NewOpenFileDialog(cfd.DialogConfig{
 		Title: "Open A File",
 		Role:  "OpenFileExample",
@@ -153,19 +174,6 @@ func OpenDialog() {
 		return
 	}
 	log.Printf("Chosen file: %s\n", result)
-
-	f, err := os.Open(result)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer f.Close()
-	image, _, _ := image.Decode(f)
-
-	baseImage = ebiten.NewImageFromImage(image)
-
-	a := NewAnim(10, 50, baseImage)
-	if anim.speed == 0 {
-		drawers = append(drawers, &anim)
-	}
-	anim = *a
+	filePath = result
+	LoadImage()
 }

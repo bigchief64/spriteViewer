@@ -37,10 +37,10 @@ func (t *TextBox) Update() {
 			if sz > 0 {
 				t.text = t.text[:sz-1]
 			}
-		} else if v == ebiten.KeyEnter{
+		} else if v == ebiten.KeyEnter {
 			t.receiveText = false
 			t.highlighted = false
-		}else {
+		} else {
 			if inpututil.KeyPressDuration(v) < 2 {
 				sLen := len(v.String())
 				t.text = t.text + v.String()[sLen-1:]
